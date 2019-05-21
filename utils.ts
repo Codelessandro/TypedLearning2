@@ -1,24 +1,30 @@
+export function flatten(list) {
+    return list.reduce(function (a, b) {
+        return a.concat(Array.isArray(b) ? flatten(b) : b);
+    }, []);
+};
+
 export function _vecDistance(a: number[]): number {
     return Math.sqrt(a.map(e => e ** 2).reduce((a, b) => a + b))
 }
 
 export function _vecSub(a: number[], b: number[]): number[] {
-    return a.map(function (e, i) {
+    return flatten(a.map(function (e, i) {
         return [e - b[i]];
-    }).flat()
+    }))
 }
 
 export function _scalarProd(a: number[], b: number[]) {
-    return a.map(function (e, i) {
+    return flatten(a.map(function (e, i) {
         return [e * b[i]];
-    }).flat().reduce((a, b) => a + b)
+    })).reduce((a, b) => a + b)
 }
 
 
 export function _vecAdd(a: number[], b: number[]): number[] {
-    return a.map(function (e, i) {
+    return flatten(a.map(function (e, i) {
         return [e + b[i]];
-    }).flat()
+    }))
 }
 
 

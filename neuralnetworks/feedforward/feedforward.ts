@@ -1,5 +1,6 @@
 import {ClassificationDataItem} from "../../data/classificationDataItem";
 import {Passenger} from "../../data/titanic/passanger";
+import {flatten} from "../../utils";
 
 export class Feedforward {
 
@@ -68,10 +69,10 @@ export class Feedforward {
 
     setup() {
         let counter = -1;
-        let neurons = this.nrNeurons.map((n, layer) => new Array(n).fill(0).map((e, index) => {
+        let neurons = flatten(this.nrNeurons.map((n, layer) => new Array(n).fill(0).map((e, index) => {
             counter++;
             return {value: 0, i: counter, l: layer}
-        })).flat()
+        })))
 
 
         this.weights = neurons.map(node => {
